@@ -1,0 +1,15 @@
+[package]
+name = "tag_sorter_backend"
+version = "0.2.1"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "4.0.32", features = ["derive"] }
+rocket = {version="0.5.0-rc.2", features=["json"]}
+serde="*"
+serde_json = "1.0.90"
+tracing = "0.1.37"
+tracing-subscriber = "0.3.16"
+thiserror="1.0.38"

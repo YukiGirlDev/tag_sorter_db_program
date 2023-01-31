@@ -1,0 +1,16 @@
+@import '@fontsource/fira-mono';
+
+:root {
+	font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	line-height: 24px;
+	font-weight: 400;
+	color: rgb(205, 214, 244);
+	background-color: rgb(30, 30, 46);
+  }
+  
+  input, button {
+	background-color: rgb(49, 50, 68);
+	color: rgb(205, 214, 244);
+	border: 1px solid rgb(108, 112, 134);
+  }
