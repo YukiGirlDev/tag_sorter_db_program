@@ -1,6 +1,6 @@
 import type { Item } from "src/routes/item";
 import { writable, type Writable } from "svelte/store";
-import { ip } from "./settings";
+import { IP } from "./settings";
 
 export let search_tag_recomendations: Writable<string[]> = writable([]);
 export let items: Item[] = [];
@@ -30,7 +30,7 @@ export async function get_db(
     run: (new_items: Item[]) => void
 ) {
     
-    const res = await fetch(ip + '/api', {
+    const res = await fetch(IP + '/api', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

@@ -11,6 +11,6 @@
 		>.
 	</p>
     <p>
-        This programs source code can be found <a class="text-blue-500" href="https://github.com">here</a>
+        This programs source code can be found <a class="text-blue-500" href="https://github.com/YukiGirlDev/tag_sorter_db_program">here</a>
     </p>
 </article>

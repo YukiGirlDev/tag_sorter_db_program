@@ -1,7 +1,7 @@
 import { browser } from '$app/environment';
 import { writable, type Writable } from 'svelte/store';
 
-export const ip = 'http://localhost:8000';
+export const IP = 'http://localhost:8000';
 
 export const items_per_page_default = 20;
 export let items_per_page: Writable<number>;

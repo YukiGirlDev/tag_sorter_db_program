@@ -1,9 +1,9 @@
 <script lang="ts">
+	import { IP } from '$lib/settings';
 	import TagInput from '$lib/tag_input.svelte';
 	import { file_name, file_name_raw, file_name_without_ext } from './file_operations';
 	import type { Item } from './item';
 
-	export let ip: string;
 	export let selected_item: Item | null;
 	$: {
 		selected_item = selected_item;
@@ -58,7 +58,7 @@
 					new_date.day = parseInt(a[2]);
 				}
 			}
-			const res = await fetch(ip + '/action', {
+			const res = await fetch(IP + '/action', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

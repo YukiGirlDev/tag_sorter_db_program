@@ -6,7 +6,7 @@
 	import SearchBox from './SearchBox.svelte';
 	import '../app.css';
 	import { browser } from '$app/environment';
-	import { ip, items_per_page, items_per_page_default } from '$lib/settings';
+	import { IP, items_per_page, items_per_page_default } from '$lib/settings';
 	import {
 		get_db,
 		items,
@@ -121,7 +121,7 @@
 			/>
 		</td>
 		<td style="padding: 5px;">
-			<Editing {ip} bind:selected_item bind:promise bind:is_editing />
+			<Editing bind:selected_item bind:promise bind:is_editing />
 		</td>
 	</tr>
 </table>

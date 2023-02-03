@@ -24,7 +24,7 @@ mod select;
 mod tag_search;
 mod tag_suggestion;
 
-use std::{collections::HashSet, io::Write, path::PathBuf};
+use std::io::Write;
 
 use ::clap::Parser;
 use clap_struct::Cli;
@@ -38,20 +38,6 @@ const SETTINGSPATH: &str = "settings.DO.NOT.TOUCH";
 
 #[rocket::main]
 async fn main() -> Result<(), rocket::Error> {
-    println!(
-        "{}",
-        serde_json::to_string_pretty(&select::DataBaseAction {
-            version: String::from("0.1.0"),
-            action: select::Action::Edit(Item {
-                id: 0,
-                path: PathBuf::from("test"),
-                year: 2000,
-                month: 1,
-                day: 1,
-                tags: HashSet::default()
-            })
-        }).unwrap()
-    );
     let cli = Cli::parse();
     let subscriber = FmtSubscriber::builder()
         .with_max_level(Level::WARN)
@@ -88,5 +74,5 @@ async fn main() -> Result<(), rocket::Error> {
 }
 #[get("/source")]
 fn get_source() -> String {
-    String::from("https://github.com/Wiry7952/tag_sorting_db_program")
+    String::from("https://github.com/YukiGirlDev/tag_sorter_db_program")
 }

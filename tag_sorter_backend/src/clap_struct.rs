@@ -4,7 +4,7 @@ use clap::Parser;
 
 
 #[derive(Parser)]
-#[command(author="Faye Evans", version, about, long_about = None)]
+#[command(author="YukiGirlDev", version, about, long_about = None)]
 pub struct Cli {
     pub path: PathBuf
 }

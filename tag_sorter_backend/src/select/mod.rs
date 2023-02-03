@@ -4,13 +4,13 @@ use rocket::serde::json::Json;
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
-use crate::{item::Item, get_settings::get_settings};
+use crate::{get_settings::get_settings, item::Item};
 
 use self::filter::{Filter, FilterDate};
 
 const APIVERSION: &str = "0.1.0";
 
-mod filter;
+pub mod filter;
 
 #[cfg(test)]
 mod test;
@@ -29,7 +29,7 @@ pub enum Error {
     Serde(#[from] serde_json::Error),
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum Action {
     Create(Item),
     Edit(Item),
@@ -65,10 +65,12 @@ impl DataBaseAction {
             Action::Delete(filter) => {
                 let db_path = get_settings().await?;
                 let items = filter.run(&mut db);
+                let mut ids = Vec::new();
                 for i in items {
+                    ids.push(i.id);
                     rocket::tokio::fs::remove_file(db_path.join(&i.path)).await?;
                 }
-                Ok(db)
+                Ok(db.into_iter().filter(|x| !ids.contains(&x.id)).collect())
             }
             Action::SetDate(filter, date) => {
                 let items = filter.run(&mut db);
@@ -114,12 +116,11 @@ impl DataBaseAction {
     }
 }
 
-
 #[post("/action", format = "application/json", data = "<action>")]
 pub async fn action(action: Json<DataBaseAction>) -> String {
     match run_action(action.0).await {
         Ok(_) => String::from(r#"{"is_ok":true}"#),
-        Err(err) => format!("{{\"is_ok\":false,\"error\":{:?}}}", err.to_string())
+        Err(err) => format!("{{\"is_ok\":false,\"error\":{:?}}}", err.to_string()),
     }
 }
 

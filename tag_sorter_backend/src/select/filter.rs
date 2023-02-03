@@ -5,8 +5,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::{item::Item, search::from_number};
 
-
-#[derive(Deserialize, Default, Serialize)]
+#[derive(Deserialize, Default, Serialize, Debug)]
 pub struct Filter {
     pub(super) id: Option<usize>,
     pub(super) id_range: Option<FilterRange<usize>>,
@@ -86,7 +85,10 @@ impl Filter {
         self
     }
     pub fn id_range(mut self, id1: usize, id2: usize) -> Self {
-        self.id_range = Some(FilterRange { start: id1, end: id2 });
+        self.id_range = Some(FilterRange {
+            start: id1,
+            end: id2,
+        });
         self
     }
     pub fn name(mut self, name: String) -> Self {
@@ -106,7 +108,10 @@ impl Filter {
         self
     }
     pub fn date_range(mut self, date1: FilterDate, date2: FilterDate) -> Self {
-        self.date_range = Some(FilterRange { start: date1, end: date2 });
+        self.date_range = Some(FilterRange {
+            start: date1,
+            end: date2,
+        });
         self
     }
     pub fn tag(mut self, tags: HashSet<String>) -> Self {
@@ -122,7 +127,7 @@ impl Filter {
         self
     }
 }
-#[derive(Deserialize, Clone, Serialize)]
+#[derive(Deserialize, Clone, Serialize, Debug)]
 #[allow(clippy::module_name_repetitions)]
 pub struct FilterRange<T: Clone> {
     start: T,
@@ -135,7 +140,7 @@ impl<T: Clone> From<FilterRange<T>> for Range<T> {
         val.start..val.end
     }
 }
-#[derive(Deserialize, Clone, Copy, PartialEq, Eq, Serialize)]
+#[derive(Deserialize, Clone, Copy, PartialEq, Eq, Serialize, Debug)]
 #[allow(clippy::module_name_repetitions)]
 pub struct FilterDate {
     pub(super) year: i32,
